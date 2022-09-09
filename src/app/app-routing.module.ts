@@ -4,6 +4,7 @@ import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { RecipeComponent } from './component/recipe/recipe.component';
+import { UserComponent } from './component/user/user.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'user',
+    component: UserComponent,
   },
   {
     path: 'recipe/:id',

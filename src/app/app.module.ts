@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeComponent } from './component/recipe/recipe.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { UserComponent } from './component/user/user.component';
+import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,10 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
     LoginComponent,
     RecipeComponent,
     PageNotFoundComponent,
+    UserComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

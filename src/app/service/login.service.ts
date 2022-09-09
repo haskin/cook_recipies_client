@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ApiResponse } from '../model/ApiResponse';
 import { LoginResponse } from '../model/LoginResponse';
 import { User } from '../model/User';
+import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -16,6 +17,7 @@ export class LoginService {
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private httpClient: HttpClient
   ) {}
 
@@ -46,9 +48,14 @@ export class LoginService {
 
   login(user: User): void {
     let url = `${this.userUrlPrefix}/signin`;
-    this.httpClient.post<LoginResponse>(url, user).subscribe((response) => {
-      console.log(response.tokenType);
-      this.userService.setToken(response.accessToken);
-    });
+    this.httpClient.post<LoginResponse>(url, user).subscribe(
+      (response) => {
+        console.log('Login response token: ' + response.accessToken);
+        this.authService.setToken(response.accessToken);
+      },
+      (err) => {
+        console.log('In error: ' + err);
+      }
+    );
   }
 }
