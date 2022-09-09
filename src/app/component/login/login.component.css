@@ -1,0 +1,30 @@
+#login-container {
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  background-color: darkblue;
+  border-radius: 15px;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* color: white; */
+}
+
+.form-row {
+  background-color: darkblue;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  padding: 5px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#button-container {
+  display: flex;
+  flex-direction: row;
+}

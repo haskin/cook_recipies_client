@@ -1,0 +1,17 @@
+<div id="navigation-container">
+  <a id="home-link" routerLink="/"><img src="assets/house.png" /></a>
+  <div id="logo-container">
+    <h1>CookRecipes</h1>
+  </div>
+  <div *ngIf="!loggedIn">
+    <a routerLink="/login">
+      <button id="login-button">Log In</button>
+    </a>
+  </div>
+  <!-- <a id="pal-list-link" routerLink="/pals"
+    >Pickle Jar
+    <ng-container *ngIf="pals$ | async as pals">
+      ({{ palsSize }})
+    </ng-container>
+  </a> -->
+</div>

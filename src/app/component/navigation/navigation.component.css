@@ -1,0 +1,24 @@
+#navigation-container {
+  width: 100%;
+  height: 50px;
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-around;
+}
+
+#home-link > img:hover {
+  filter: invert(48%) sepia(16%) saturate(1496%) hue-rotate(73deg)
+    brightness(98%) contrast(92%);
+}
+
+#home-link > img {
+  margin-left: 10px;
+  max-width: 30px;
+  filter: invert(16%) sepia(96%) saturate(4622%) hue-rotate(105deg)
+    brightness(103%) contrast(106%);
+}
+
+#login-button {
+  padding: 20px;
+  background-color: #ff5959;
+}
