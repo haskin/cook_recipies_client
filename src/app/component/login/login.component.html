@@ -1,5 +1,9 @@
 <app-navigation></app-navigation>
 <div id="login-container">
+  <div class="form-row"><h1>Login Form</h1></div>
+  <div class="form-row" *ngIf="registerSuccess">
+    <h1>Successfully Registered</h1>
+  </div>
   <div class="form-row">
     <label for="username">Username</label>
     <input
