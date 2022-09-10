@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { tap } from 'rxjs/internal/operators/tap';
 import { ApiResponse } from '../model/ApiResponse';
 import { LoginResponse } from '../model/LoginResponse';
 import { User } from '../model/User';
@@ -11,7 +14,10 @@ import { UserService } from './user.service';
 })
 export class LoginService {
   registerError: boolean = false;
-  loggedIn: boolean = false;
+
+  private _loggedIn$ = new BehaviorSubject<boolean>(false);
+  loggedIn$ = this._loggedIn$.asObservable();
+
   readonly userUrlPrefix: string = 'http://localhost:8080/api/user';
   readonly registerSuffix: string = '/signup';
 
@@ -21,12 +27,12 @@ export class LoginService {
     private httpClient: HttpClient
   ) {}
 
-  isLoggedIn(): boolean {
-    return this.loggedIn;
-  }
-  setLoggedIn(loggedIn: boolean) {
-    this.loggedIn = loggedIn;
-  }
+  // isLoggedIn(): boolean {
+  //   return this.loggedIn;
+  // }
+  // setLoggedIn(loggedIn: boolean) {
+  //   this.loggedIn = loggedIn;
+  // }
 
   register(user: User): boolean {
     let apiResponse: ApiResponse = { success: false, message: '' };
@@ -46,16 +52,23 @@ export class LoginService {
     return apiResponse.success;
   }
 
-  login(user: User): void {
+  login(user: User): Observable<any> {
     let url = `${this.userUrlPrefix}/signin`;
-    this.httpClient.post<LoginResponse>(url, user).subscribe(
-      (response) => {
+    // this.httpClient.post<LoginResponse>(url, user).subscribe(
+    //   (response) => {
+    //     console.log('Login response token: ' + response.accessToken);
+    //     this.authService.setToken(response.accessToken);
+    //   },
+    //   (err) => {
+    //     console.log('In error: ' + err);
+    //   }
+    // );
+    return this.httpClient.post<LoginResponse>(url, user).pipe(
+      tap((response: LoginResponse) => {
         console.log('Login response token: ' + response.accessToken);
         this.authService.setToken(response.accessToken);
-      },
-      (err) => {
-        console.log('In error: ' + err);
-      }
+        this._loggedIn$.next(true);
+      })
     );
   }
 }

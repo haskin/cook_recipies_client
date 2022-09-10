@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/service/login.service';
 import { UserService } from 'src/app/service/user.service';
 
@@ -11,7 +12,9 @@ export class LoginComponent implements OnInit {
   registerSuccess: boolean = false;
   username: string = '';
   password: string = '';
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {
+    // console.log('In login');
+  }
 
   ngOnInit(): void {}
 
@@ -24,9 +27,13 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.loginService.login({
+    let user = {
       username: this.username,
       password: this.password,
+    };
+    this.loginService.login(user).subscribe((response) => {
+      console.log(response);
+      this.router.navigate(['']);
     });
   }
 }
