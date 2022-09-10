@@ -8,6 +8,11 @@
       <button id="login-button">Log In</button>
     </a>
   </div>
+  <div *ngIf="loggedIn">
+    <a routerLink="/user">
+      <button id="user-button">Profile</button>
+    </a>
+  </div>
   <!-- <a id="pal-list-link" routerLink="/pals"
     >Pickle Jar
     <ng-container *ngIf="pals$ | async as pals">
