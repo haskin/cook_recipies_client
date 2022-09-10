@@ -1,2 +1,21 @@
 <app-navigation></app-navigation>
-<p>user works!</p>
+<div id="user-component-container">
+  <div>
+    <h1>{{user.username}}</h1>
+  </div>
+  <div id="my-recipes-container">
+    <div id="my-recipes-header">
+      <h2>My Recipes</h2>
+      <a routerLink="create/recipe">
+        <button>Create New Recipe</button>
+      </a>
+    </div>
+    <ul *ngFor="let recipe of recipes">
+      <li>
+        <a routerLink="/recipe/{{recipe.id}}">
+          <img src="{{recipe.image}}" alt="{{recipe.name}}" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

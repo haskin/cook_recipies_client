@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Recipe } from '../model/Recipe';
 import { User } from '../model/User';
 import { AuthService } from './auth.service';
 
@@ -32,5 +33,9 @@ export class UserService implements OnInit {
     // if (typeof this.token === undefined) return false;
     // if (typeof this.token !== undefined) return this.token.trim().length > 0;
     // return false;
+  }
+
+  getUserRecipes(): Observable<Recipe[]> {
+    return this.httpClient.get<Recipe[]>(`${this.USER_URL}/recipes`);
   }
 }
