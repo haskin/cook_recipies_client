@@ -1,2 +1,76 @@
 <app-navigation></app-navigation>
-<h1 *ngIf="recipe">{{recipe.name}}</h1>
+<div id="create-recipe-container">
+  <h1>Edit Recipe</h1>
+  <form id="create-recipe-form">
+    <div class="form-row">
+      <h2 *ngIf="!recipeName">Recipe Name</h2>
+      <h2>{{recipeName}}</h2>
+      <input
+        name="recipe-name"
+        [(ngModel)]="recipeName"
+        placeholder="please enter a recipe name"
+      />
+    </div>
+    <div class="form-row">
+      <label class="form-label">Recipe Image</label>
+      <img
+        id="recipe-image"
+        *ngIf="recipeImage"
+        [src]="recipeImage"
+        alt="recipe-image"
+      />
+      <input [(ngModel)]="recipeImage" name="recipe-image" />
+    </div>
+    <div class="form-row">
+      <div style="display: flex">
+        <label class="form-label" for="ingredients">Ingredients</label>
+        <button class="add-button" (click)="addIngredient()">Add</button>
+      </div>
+      <ol>
+        <li
+          *ngFor="
+            let ingredient of ingredients;
+            let index = index;
+            trackBy: trackByIndex
+          "
+        >
+          {{index+1}}
+          <input
+            name="ingredient + {{index}}"
+            [(ngModel)]="ingredients[index].name"
+          />
+          <button class="delete-button" (click)="deleteIngredient(index)">
+            Delete
+          </button>
+        </li>
+      </ol>
+    </div>
+    <div class="form-row">
+      <div style="display: flex">
+        <label class="form-label" for="instructions">Instruction</label>
+        <button class="add-button" (click)="addInstruction()">Add</button>
+      </div>
+      <ol>
+        <li
+          *ngFor="
+            let instruction of instructions;
+            let index = index;
+            trackBy: trackByIndex
+          "
+        >
+          {{index+1}}
+          <input
+            name="instruction + {{index}}"
+            [(ngModel)]="instructions[index]"
+          />
+          <button class="delete-button" (click)="deleteInstruction(index)">
+            Delete
+          </button>
+        </li>
+      </ol>
+    </div>
+    <div class="form-row">
+      <button (click)="updateRecipe()">Update Recipe</button>
+    </div>
+  </form>
+</div>

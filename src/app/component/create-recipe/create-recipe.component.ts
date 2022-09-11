@@ -13,7 +13,6 @@ export class CreateRecipeComponent implements OnInit {
   recipeName: string = '';
   recipeImage: string = '';
   ingredients: Ingredient[] = [{ name: '' }];
-  // ingredients: string[] = [''];
   instructions: string[] = [''];
   constructor(private createRecipeService: CreateRecipeService) {}
   ngOnInit(): void {}
@@ -57,6 +56,7 @@ export class CreateRecipeComponent implements OnInit {
     //   this.instructions.slice()
     // );
   }
+
   trackByIndex(index: number, obj: any): any {
     return index;
   }
