@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/internal/operators/tap';
 import { Ingredient } from '../model/Ingredient';
 import { Recipe } from '../model/Recipe';
 import { RecipeResponse } from '../model/RecipeReponse';
@@ -16,24 +17,45 @@ export class CreateRecipeService {
     ingredients = ingredients.filter(
       (ingredient) => ingredient.name.trim().length > 0
     );
-    if (ingredients.length < 0) {
-      this.postRecipe(recipe);
-      return;
-    }
 
-    postRecipeWithIngredients(ingredients, recipe);
+    this.postRecipe(recipe)
+      .pipe(
+        tap((response) => console.log(`Reponse from postRecipe(): ${response}`))
+      )
+      .subscribe((recipeResponse) => {
+        this.putRecipeToUser(recipeResponse.id)
+          .pipe(tap((response) => console.log(response)))
+          .subscribe((reponse) => {
+            if (ingredients.length > 0)
+              this.putIngredientsToRecipe(ingredients, recipeResponse.id);
+          });
+      });
   }
+
   postRecipe(recipe: Recipe) {
-    this.httpClient
-      .post<RecipeResponse>(this.RECIPE_URL, recipe)
-      .subscribe((recipeResponse) => this.postRecipeToUser(recipeResponse.id));
+    return this.httpClient.post<RecipeResponse>(this.RECIPE_URL, recipe);
+    // .subscribe((recipeResponse) => this.putRecipeToUser(recipeResponse.id));
   }
 
+  // postRecipeWithIngredients(ingredient: Ingredient[], recipe: Recipe) {
+  //   this.httpClient
+  //     .post<RecipeResponse>(this.RECIPE_URL, recipe)
+  //     .subscribe((recipeResponse) => this.putRecipeToUser(recipeResponse.id));
+  // }
   putRecipeToUser(recipeId: number) {
+    return this.httpClient.put<Recipe>(
+      `${this.USER_RECIPE_URL}/${recipeId}`,
+      {}
+    );
+  }
+
+  putIngredientsToRecipe(ingredients: Ingredient[], recipeId: number) {
+    // 'api/recipe/{recipeId}/ingredients'
     this.httpClient
-      .put<Recipe>(`${this.USER_RECIPE_URL}/${recipeId}`)
+      .put<Recipe>(`${this.RECIPE_URL}/${recipeId}/ingredients`, ingredients)
       .subscribe((response) => console.log(response));
   }
+
   dataToRecipe(
     recipeName: string,
     recipeImage: string,
@@ -47,8 +69,7 @@ export class CreateRecipeService {
     return {
       name: recipeName,
       image: recipeImage,
-      instruction: instructionString,
+      instructions: instructionString,
     };
   }
-  postRecipe() {}
 }

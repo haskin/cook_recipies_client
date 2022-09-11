@@ -51,7 +51,6 @@ export class CreateRecipeComponent implements OnInit {
       this.recipeImage,
       this.instructions
     );
-
     this.createRecipeService.createRecipe(this.ingredients, recipe);
     // let result: boolean = this.createRecipeService.createRecipe(
     //   this.ingredients.slice(),
