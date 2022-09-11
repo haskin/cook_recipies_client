@@ -5,6 +5,7 @@ import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { RecipeComponent } from './component/recipe/recipe.component';
+import { UpdateRecipeComponent } from './component/update-recipe/update-recipe.component';
 import { UserComponent } from './component/user/user.component';
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'user/recipe/create',
     component: CreateRecipeComponent,
+  },
+  {
+    path: 'recipe/update/:recipeId',
+    component: UpdateRecipeComponent,
   },
   {
     path: '**',
