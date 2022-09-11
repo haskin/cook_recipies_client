@@ -1,9 +1,12 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Ingredient } from 'src/app/model/Ingredient';
 import { Recipe } from 'src/app/model/Recipe';
+import { CreateRecipeService } from 'src/app/service/create-recipe.service';
 import { RecipeService } from 'src/app/service/recipe.service';
 import { UpdateRecipeService } from 'src/app/service/update-recipe.service';
+import { CreateRecipeComponent } from '../create-recipe/create-recipe.component';
 
 @Component({
   selector: 'app-update-recipe',
@@ -20,6 +23,7 @@ export class UpdateRecipeComponent implements OnInit {
 
   constructor(
     private updateRecipeService: UpdateRecipeService,
+    private createRecipeService: CreateRecipeService,
     private recipeService: RecipeService,
     private activeRoute: ActivatedRoute
   ) {}
@@ -36,6 +40,7 @@ export class UpdateRecipeComponent implements OnInit {
           this.updateRecipeService.convertInstructionStringToArray(
             recipeResponse.instructions
           );
+        this.ingredients = recipeResponse.ingredients;
       });
   }
 
@@ -66,7 +71,25 @@ export class UpdateRecipeComponent implements OnInit {
     ];
   }
 
-  updateRecipe() {}
+  updateRecipe() {
+    let ingredients = this.createRecipeService.trimIngredients(
+      this.ingredients
+    );
+
+    let recipe: Recipe = {
+      id: this.recipeId,
+      ...this.createRecipeService.dataToRecipe(
+        this.recipeName,
+        this.recipeImage,
+        this.instructions
+      ),
+      ingredients: ingredients,
+    };
+
+    this.updateRecipeService
+      .updateRecipe(recipe)
+      .subscribe((response) => console.log(response));
+  }
 
   trackByIndex(index: number, obj: any): any {
     return index;

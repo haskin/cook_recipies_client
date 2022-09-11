@@ -13,11 +13,13 @@ export class CreateRecipeService {
   private readonly USER_RECIPE_URL = 'http://localhost:8080/api/user/recipe';
   constructor(private httpClient: HttpClient) {}
 
-  createRecipe(ingredients: Ingredient[], recipe: Recipe) {
-    ingredients = ingredients.filter(
+  trimIngredients(ingredients: Ingredient[]): Ingredient[] {
+    return ingredients.filter(
       (ingredient) => ingredient.name.trim().length > 0
     );
-
+  }
+  createRecipe(ingredients: Ingredient[], recipe: Recipe) {
+    ingredients = this.trimIngredients(ingredients);
     this.postRecipe(recipe)
       .pipe(
         tap((response) => console.log(`Reponse from postRecipe(): ${response}`))
@@ -70,6 +72,7 @@ export class CreateRecipeService {
       name: recipeName,
       image: recipeImage,
       instructions: instructionString,
+      ingredients: [],
     };
   }
 }
