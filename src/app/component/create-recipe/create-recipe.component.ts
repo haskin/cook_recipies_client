@@ -11,7 +11,7 @@ export class CreateRecipeComponent implements OnInit {
   recipeName: string = '';
   ingredients: Ingredient[] = [{ name: '' }];
   // ingredients: string[] = [''];
-  directions: string[] = [''];
+  instructions: string[] = [''];
   constructor() {}
   ngOnInit(): void {}
   addIngredient(): void {
@@ -26,6 +26,21 @@ export class CreateRecipeComponent implements OnInit {
     ];
     console.log(this.ingredients);
   }
+
+  addInstruction(): void {
+    this.instructions = [...this.instructions, ''];
+  }
+
+  deleteInstruction(instructionIndex: number): void {
+    this.instructions = [
+      ...this.instructions.slice(0, instructionIndex),
+      ...this.instructions.slice(
+        instructionIndex + 1,
+        this.instructions.length
+      ),
+    ];
+  }
+
   trackByIndex(index: number, obj: any): any {
     return index;
   }
