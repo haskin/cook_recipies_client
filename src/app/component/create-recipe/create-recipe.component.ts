@@ -1,6 +1,8 @@
 import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from 'src/app/model/Ingredient';
+import { Recipe } from 'src/app/model/Recipe';
+import { CreateRecipeService } from 'src/app/service/create-recipe.service';
 
 @Component({
   selector: 'app-create-recipe',
@@ -9,10 +11,11 @@ import { Ingredient } from 'src/app/model/Ingredient';
 })
 export class CreateRecipeComponent implements OnInit {
   recipeName: string = '';
+  recipeImage: string = '';
   ingredients: Ingredient[] = [{ name: '' }];
   // ingredients: string[] = [''];
   instructions: string[] = [''];
-  constructor() {}
+  constructor(private createRecipeService: CreateRecipeService) {}
   ngOnInit(): void {}
   addIngredient(): void {
     this.ingredients = [...this.ingredients, { name: '' }];
@@ -41,6 +44,20 @@ export class CreateRecipeComponent implements OnInit {
     ];
   }
 
+  submitNewRecipe(): void {
+    console.log('creating a new recipe');
+    let recipe: Recipe = this.createRecipeService.dataToRecipe(
+      this.recipeName,
+      this.recipeImage,
+      this.instructions
+    );
+
+    this.createRecipeService.createRecipe(this.ingredients, recipe);
+    // let result: boolean = this.createRecipeService.createRecipe(
+    //   this.ingredients.slice(),
+    //   this.instructions.slice()
+    // );
+  }
   trackByIndex(index: number, obj: any): any {
     return index;
   }

@@ -3,12 +3,23 @@
   <h1>Create a New Recipe</h1>
   <form id="create-recipe-form">
     <div class="form-row">
-      <label class="form-label"> Recipe Name </label>
+      <h2 *ngIf="!recipeName">Recipe Name</h2>
+      <h2>{{recipeName}}</h2>
       <input
         name="recipe-name"
         [(ngModel)]="recipeName"
         placeholder="please enter a recipe name"
       />
+    </div>
+    <div class="form-row">
+      <label class="form-label">Recipe Image</label>
+      <img
+        id="recipe-image"
+        *ngIf="recipeImage"
+        [src]="recipeImage"
+        alt="recipe-image"
+      />
+      <input [(ngModel)]="recipeImage" name="recipe-image" />
     </div>
     <div class="form-row">
       <div style="display: flex">
@@ -57,6 +68,9 @@
           </button>
         </li>
       </ol>
+    </div>
+    <div class="form-row">
+      <button (click)="submitNewRecipe()">Create New Recipe</button>
     </div>
   </form>
 </div>

@@ -1,5 +1,5 @@
-export interface Recipe {
-  id?: number;
+export interface RecipeResponse {
+  id: number;
   name: string;
   instruction: string;
   image: string;
