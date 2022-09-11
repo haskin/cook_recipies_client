@@ -1,0 +1,18 @@
+.form-label {
+  font-size: large;
+}
+.form-row {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  background-color: darkgray;
+  max-width: 500px;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.add-button {
+  padding: 10px;
+}

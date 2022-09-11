@@ -12,6 +12,7 @@ import { RecipeComponent } from './component/recipe/recipe.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { UserComponent } from './component/user/user.component';
 import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
+import { CreateRecipeComponent } from './component/create-recipe/create-recipe.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
     RecipeComponent,
     PageNotFoundComponent,
     UserComponent,
+    CreateRecipeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [AuthInterceptorProvider],

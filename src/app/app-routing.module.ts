@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateRecipeComponent } from './component/create-recipe/create-recipe.component';
 import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'recipe/:id',
     component: RecipeComponent,
+  },
+  {
+    path: 'user/recipe/create',
+    component: CreateRecipeComponent,
   },
   {
     path: '**',
