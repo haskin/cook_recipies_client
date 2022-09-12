@@ -1,16 +1,28 @@
 <app-navigation></app-navigation>
 <div id="home-container">
-  <h1>CookRecipes</h1>
+  <div id="title-container">
+    <h1 id="title">Recipe Search</h1>
+  </div>
   <!-- <input
     id="search-input"
     [(ngModel)]="search"
     placeholder="please search for a recipe"
   /> -->
-  <input #searchBox id="search-input" (input)="search(searchBox.value)" />
-  <div *ngIf="searchBox.value">
+  <input
+    #searchBox
+    id="search-input"
+    (input)="search(searchBox.value)"
+    placeholder="please type in a recipe title"
+    autofocus
+  />
+  <div id="search-results-container" *ngIf="searchBox.value">
     <div *ngFor="let recipe of recipes$ | async">
       <a routerLink="/recipe/{{recipe.id}}">
-        <img src="{{recipe.image}}" alt="{{recipe.name}}" />
+        <img
+          class="recipe-image"
+          src="{{recipe.image}}"
+          alt="{{recipe.name}}"
+        />
       </a>
     </div>
   </div>

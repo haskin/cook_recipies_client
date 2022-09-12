@@ -1,7 +1,10 @@
 <div id="navigation-container">
-  <a id="home-link" routerLink="/"><img src="assets/house.png" /></a>
+  <a id="home-link" routerLink="/"
+    ><img src="assets/house.png" alt="home-button"
+  /></a>
   <div id="logo-container">
     <h1>CookRecipes</h1>
+    <img id="carrot-logo" src="assets/carrot.png" alt="carrot-logo" />
   </div>
   <div *ngIf="!loggedIn">
     <a routerLink="/login">

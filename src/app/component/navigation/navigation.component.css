@@ -1,24 +1,67 @@
+::ng-deep :root {
+  --appLightBlue: #abd9ff;
+  --appLightOrange: #ffa93f;
+  --appDarkOrange: #ff9c20;
+}
+* {
+  background-color: var(--appLightBlue);
+}
 #navigation-container {
   width: 100%;
-  height: 50px;
-  border: 1px solid red;
+  height: 68px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #ff5959; */
 }
 
-#home-link > img:hover {
+#logo-container {
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
+#logo-container > h1 {
+  font-size: 45px;
+  color: white;
+  -webkit-text-stroke: 2px black; /* width and color */
+}
+
+#carrot-logo {
+  width: 45px;
+  height: 45px;
+  margin-left: 5px;
+}
+
+#home-link {
+  /* border: 1px solid red; */
+  background-color: none;
+}
+/* #home-link > img:hover {
   filter: invert(48%) sepia(16%) saturate(1496%) hue-rotate(73deg)
     brightness(98%) contrast(92%);
-}
+} */
 
 #home-link > img {
   margin-left: 10px;
-  max-width: 30px;
-  filter: invert(16%) sepia(96%) saturate(4622%) hue-rotate(105deg)
-    brightness(103%) contrast(106%);
+  max-width: 45px;
+  background-color: var(--appLightBlue);
+  border: 0;
+  padding: 0;
+  /* filter: invert(83%) sepia(21%) saturate(4932%) hue-rotate(328deg)
+    brightness(105%) contrast(101%); */
+  border-radius: 10px;
 }
 
 #login-button {
-  padding: 20px;
-  background-color: #ff5959;
+  margin-right: 10px;
+  background-color: var(--appDarkOrange);
+  /* color: black; */
+  font-weight: bold;
+}
+
+#login-button:hover {
+  background-color: #ff9005;
 }

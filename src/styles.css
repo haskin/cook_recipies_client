@@ -1,15 +1,26 @@
+/* --appLightBlue: #abd9ff; */
+
+::ng-deep :root {
+  --appLightBlue: #abd9ff;
+}
+
 * {
   margin: 0;
   border: 0;
   padding: 0;
-  background-color: #eef2ff;
+  /* background-color: #eef2ff; */
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 button {
   border-radius: 15px;
-  padding: 10px;
-  background-color: aquamarine;
+  /* padding: 10px; */
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
 button:hover {
