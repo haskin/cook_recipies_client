@@ -65,4 +65,9 @@ export class UserComponent implements OnInit, OnDestroy {
       this.userService.deleteUserRecipe(recipeId);
     }
   }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
 }

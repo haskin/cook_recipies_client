@@ -36,4 +36,9 @@ export class AuthService {
   getTokenActive(): Observable<boolean> {
     return this._tokenActive$;
   }
+
+  logout(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+    this._tokenActive$.next(false);
+  }
 }
