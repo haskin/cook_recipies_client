@@ -21,7 +21,7 @@ export class HomeService {
 
   getRecipes(): Observable<Recipe[]> {
     return this.httpClient.get<Recipe[]>(
-      `${this.RECIPES_URL}/?name=${this.searchTerm}`
+      `${this.RECIPES_URL}?name=${this.searchTerm}`
     );
   }
 }

@@ -12,6 +12,9 @@
     </div>
     <ul *ngFor="let recipe of recipes">
       <li>
+        <button (click)="deleteRecipe(recipe.id)" style="background-color: red">
+          Delete
+        </button>
         <a routerLink="/recipe/{{recipe.id}}">
           <img src="{{recipe.image}}" alt="{{recipe.name}}" />
         </a>

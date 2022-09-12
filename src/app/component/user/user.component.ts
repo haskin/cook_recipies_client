@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription, tap } from 'rxjs';
+import { Observable, of, Subscription, tap } from 'rxjs';
 import { Recipe } from 'src/app/model/Recipe';
 import { User } from 'src/app/model/User';
 import { AuthService } from 'src/app/service/auth.service';
@@ -18,6 +18,7 @@ export class UserComponent implements OnInit, OnDestroy {
   user: User = { username: '' };
   userSubscription = new Subscription();
 
+  // recipes$ = new Observable<Recipe[]>();
   recipes: Recipe[] = [];
   recipesSubscription: Subscription = new Subscription();
 
@@ -43,15 +44,25 @@ export class UserComponent implements OnInit, OnDestroy {
       },
       (error) => console.log(error)
     );
-    this.recipesSubscription = this.userService
-      .getUserRecipes()
-      .pipe(tap((recipes) => console.log(`Recieved User recipes: ${recipes}`)))
-      .subscribe((recipes) => (this.recipes = recipes));
+    this.recipesSubscription = this.userService.recipesSubject.subscribe(
+      (recipes) => (this.recipes = recipes)
+    );
+    this.userService.getUserRecipes();
+    // this.recipesSubscription = this.userService
+    //   .getUserRecipes()
+    //   .pipe(tap((recipes) => console.log(`Recieved User recipes: ${recipes}`)))
+    //   .subscribe((recipes) => (this.recipes = recipes));
   }
 
   ngOnDestroy(): void {
     this.loggedInSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
     this.recipesSubscription.unsubscribe();
+  }
+
+  deleteRecipe(recipeId: number | undefined) {
+    if (!!recipeId) {
+      this.userService.deleteUserRecipe(recipeId);
+    }
   }
 }
