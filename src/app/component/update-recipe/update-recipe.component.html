@@ -1,10 +1,10 @@
 <app-navigation></app-navigation>
 <div id="create-recipe-container">
-  <h1>Edit Recipe</h1>
+  <h1 class="recipe-name-title">Update a Recipe</h1>
   <form id="create-recipe-form">
     <div class="form-row">
-      <h2 *ngIf="!recipeName">Recipe Name</h2>
-      <h2>{{recipeName}}</h2>
+      <h2 class="recipe-name-title" *ngIf="!recipeName">Recipe Name</h2>
+      <h2 class="recipe-name-title">{{recipeName}}</h2>
       <input
         name="recipe-name"
         [(ngModel)]="recipeName"
@@ -22,12 +22,13 @@
       <input [(ngModel)]="recipeImage" name="recipe-image" />
     </div>
     <div class="form-row">
-      <div style="display: flex">
+      <div style="display: flex; align-items: center; margin-bottom: 10px">
         <label class="form-label" for="ingredients">Ingredients</label>
         <button class="add-button" (click)="addIngredient()">Add</button>
       </div>
-      <ol>
+      <ul>
         <li
+          class="ingredient-instruction-container"
           *ngFor="
             let ingredient of ingredients;
             let index = index;
@@ -36,6 +37,7 @@
         >
           {{index+1}}
           <input
+            class="ingredient-input"
             name="ingredient + {{index}}"
             [(ngModel)]="ingredients[index].name"
           />
@@ -43,15 +45,16 @@
             Delete
           </button>
         </li>
-      </ol>
+      </ul>
     </div>
     <div class="form-row">
-      <div style="display: flex">
+      <div style="display: flex; align-items: center; margin-bottom: 10px">
         <label class="form-label" for="instructions">Instruction</label>
         <button class="add-button" (click)="addInstruction()">Add</button>
       </div>
-      <ol>
+      <ul>
         <li
+          class="ingredient-instruction-container"
           *ngFor="
             let instruction of instructions;
             let index = index;
@@ -60,6 +63,7 @@
         >
           {{index+1}}
           <input
+            class="instruction-input"
             name="instruction + {{index}}"
             [(ngModel)]="instructions[index]"
           />
@@ -67,10 +71,11 @@
             Delete
           </button>
         </li>
-      </ol>
+      </ul>
     </div>
-    <div class="form-row">
-      <button (click)="updateRecipe()">Update Recipe</button>
+    <div class="form-row" style="align-items: center">
+      <button id="create-button" (click)="updateRecipe()">Update Recipe</button>
     </div>
   </form>
 </div>
+
