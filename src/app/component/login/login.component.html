@@ -1,6 +1,6 @@
 <app-navigation></app-navigation>
-<div id="login-container">
-  <div class="form-row"><h1>Login Form</h1></div>
+<form id="login-container">
+  <div class="form-row"><h1 id="form-title">Login</h1></div>
   <div class="form-row" *ngIf="registerSuccess">
     <h1>Successfully Registered</h1>
   </div>
@@ -11,6 +11,7 @@
       type="text"
       placeholder="please enter a username"
       required
+      autofocus
     />
   </div>
   <div class="form-row">
@@ -23,7 +24,9 @@
     />
   </div>
   <div id="button-container" class="form-row">
-    <button (click)="register()">Register</button>
-    <button (click)="login()">Log In</button>
+    <button type="submit" id="register-button" (click)="register()">
+      Register
+    </button>
+    <button type="submit" id="login-button" (click)="login()">Log In</button>
   </div>
-</div>
+</form>
