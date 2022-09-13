@@ -26,7 +26,7 @@
         <label class="form-label" for="ingredients">Ingredients</label>
         <button class="add-button" (click)="addIngredient()">Add</button>
       </div>
-      <ol>
+      <ul>
         <li
           *ngFor="
             let ingredient of ingredients;
@@ -43,14 +43,14 @@
             Delete
           </button>
         </li>
-      </ol>
+      </ul>
     </div>
     <div class="form-row">
       <div style="display: flex">
         <label class="form-label" for="instructions">Instruction</label>
         <button class="add-button" (click)="addInstruction()">Add</button>
       </div>
-      <ol>
+      <ul>
         <li
           *ngFor="
             let instruction of instructions;
@@ -67,7 +67,7 @@
             Delete
           </button>
         </li>
-      </ol>
+      </ul>
     </div>
     <div class="form-row">
       <button (click)="submitNewRecipe()">Create New Recipe</button>
