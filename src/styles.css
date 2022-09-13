@@ -12,6 +12,10 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+ul {
+  list-style-type: none;
+}
+
 button {
   border-radius: 15px;
   /* padding: 10px; */
@@ -21,6 +25,7 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  font-weight: bold;
 }
 
 button:hover {

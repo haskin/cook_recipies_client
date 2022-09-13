@@ -1,25 +1,33 @@
 <app-navigation></app-navigation>
 <div id="user-component-container">
-  <div>
+  <div id="user-information-container">
     <h1>{{user.username}}</h1>
-    <button (click)="logout()">Logout</button>
+    <button id="logout-button" (click)="logout()">Logout</button>
   </div>
   <div id="my-recipes-container">
     <div id="my-recipes-header">
       <h2>My Recipes</h2>
       <a routerLink="recipe/create">
-        <button>Create New Recipe</button>
+        <button id="create-recipe-button">Create New Recipe</button>
       </a>
     </div>
     <ul *ngFor="let recipe of recipes">
-      <li>
-        <button (click)="deleteRecipe(recipe.id)" style="background-color: red">
-          Delete
-        </button>
+      <li class="recipe-container">
+        <div id="recipe-container-button-container">
+          <button (click)="deleteRecipe(recipe.id)" id="delete-button">
+            Delete
+          </button>
+          <button routerLink="/recipe/update/{{recipe.id}}" id="edit-button">
+            Change
+          </button>
+        </div>
         <a routerLink="/recipe/{{recipe.id}}">
-          <img src="{{recipe.image}}" alt="{{recipe.name}}" />
+          <img
+            class="recipe-image"
+            src="{{recipe.image}}"
+            alt="{{recipe.name}}"
+          />
         </a>
-        <button routerLink="/recipe/update/{{recipe.id}}">Edit</button>
       </li>
     </ul>
   </div>
