@@ -1,8 +1,10 @@
-/* --appLightBlue: #abd9ff; */
-
 ::ng-deep :root {
   --appLightBlue: #abd9ff;
-}
+  --appDarkBlue: #92ccfc;
+  --appLightOrange: #ffa93f;
+  --appDarkOrange: #ff9c20;
+  --appLightGrey: #f5f5f5;
+}/* --appLightBlue: #abd9ff; */
 
 * {
   margin: 0;
@@ -17,6 +19,7 @@ ul {
 }
 
 button {
+  background-color: var(--appLightBlue);
   border-radius: 15px;
   /* padding: 10px; */
   color: white;
@@ -30,4 +33,5 @@ button {
 
 button:hover {
   cursor: pointer;
+  background-color: var(--appDarkBlue);
 }
