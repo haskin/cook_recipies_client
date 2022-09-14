@@ -9,6 +9,8 @@
         name="recipe-name"
         [(ngModel)]="recipeName"
         placeholder="please enter a recipe name"
+        ngModel
+        required
       />
     </div>
     <div class="form-row">
@@ -19,7 +21,7 @@
         [src]="recipeImage"
         alt="recipe-image"
       />
-      <input [(ngModel)]="recipeImage" name="recipe-image" />
+      <input [(ngModel)]="recipeImage" name="recipe-image" required />
     </div>
     <div class="form-row">
       <div style="display: flex; align-items: center; margin-bottom: 10px">
@@ -54,6 +56,7 @@
       </div>
       <ul>
         <li
+          style="max-height: 1000px; max-width: 1000px"
           class="ingredient-instruction-container"
           *ngFor="
             let instruction of instructions;
@@ -66,6 +69,7 @@
             class="instruction-input"
             name="instruction + {{index}}"
             [(ngModel)]="instructions[index]"
+            contenteditable="true"
           />
           <button class="delete-button" (click)="deleteInstruction(index)">
             Delete
