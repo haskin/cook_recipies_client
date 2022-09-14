@@ -34,6 +34,7 @@
 #my-recipes-header {
   display: flex;
   align-items: center;
+  margin: 10px 5px 10px 5px;
 }
 
 #create-recipe-button {
@@ -41,6 +42,14 @@
   background-color: var(--appDarkBlue);
 }
 
+#my-recipes-recipes {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
 .recipe-container {
   /* display: flex; */
   /* align-items: top; */
@@ -48,6 +57,8 @@
   width: 280px; /* same width as image*/
   height: 330px;
   margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 #recipe-container-button-container {
