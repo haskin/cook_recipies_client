@@ -22,4 +22,9 @@ export class RecipeComponent implements OnInit {
       .getRecipeById(this.recipeId)
       .subscribe((recipeResponse) => (this.recipe = recipeResponse));
   }
+
+  getInstructions(): string[] {
+    if (this.recipe) return this.recipe.instructions.split('|');
+    return [];
+  }
 }

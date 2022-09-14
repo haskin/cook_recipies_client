@@ -1,6 +1,23 @@
 <app-navigation></app-navigation>
-<div class="recipe-container">
+<div id="recipe-component-container">
   <div *ngIf="recipe">
     <h1>{{recipe.name}}</h1>
+    <img src="{{recipe.image}}" alt="" />
+    <h2>Ingredients</h2>
+    <ul>
+      <li class="list-item" *ngFor="let ingredient of recipe.ingredients">
+        {{ingredient.name}}
+      </li>
+    </ul>
+    <h2>Instruction</h2>
+    <ul>
+      <li
+        class="list-item"
+        *ngFor="let instruction of getInstructions(); let index = index"
+      >
+        {{index+1}}. {{instruction}}
+      </li>
+    </ul>
+    <div></div>
   </div>
 </div>
