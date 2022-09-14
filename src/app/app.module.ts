@@ -36,7 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      positionClass: 'absolute',
+      positionClass: 'toast-top-left',
     }),
   ],
   providers: [AuthInterceptorProvider],

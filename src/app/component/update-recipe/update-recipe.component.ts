@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Ingredient } from 'src/app/model/Ingredient';
 import { Recipe } from 'src/app/model/Recipe';
 import { CreateRecipeService } from 'src/app/service/create-recipe.service';
@@ -25,7 +26,8 @@ export class UpdateRecipeComponent implements OnInit {
     private updateRecipeService: UpdateRecipeService,
     private createRecipeService: CreateRecipeService,
     private recipeService: RecipeService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -88,7 +90,10 @@ export class UpdateRecipeComponent implements OnInit {
 
     this.updateRecipeService
       .updateRecipe(recipe)
-      .subscribe((response) => console.log(response));
+      .subscribe((response) => {
+        console.log(response);
+        this.toastr.success("Recipe has been updated successfuly", "SUCCESS");
+      });
   }
 
   trackByIndex(index: number, obj: any): any {
