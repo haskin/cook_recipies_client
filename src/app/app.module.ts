@@ -14,6 +14,8 @@ import { UserComponent } from './component/user/user.component';
 import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
 import { CreateRecipeComponent } from './component/create-recipe/create-recipe.component';
 import { UpdateRecipeComponent } from './component/update-recipe/update-recipe.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,16 @@ import { UpdateRecipeComponent } from './component/update-recipe/update-recipe.c
     CreateRecipeComponent,
     UpdateRecipeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'absolute',
+    }),
+  ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent],
 })

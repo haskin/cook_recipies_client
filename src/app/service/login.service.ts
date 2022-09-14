@@ -34,8 +34,8 @@ export class LoginService {
   //   this.loggedIn = loggedIn;
   // }
 
-  register(user: User): boolean {
-    let apiResponse: ApiResponse = { success: false, message: '' };
+  register(user: User): Observable<ApiResponse> {
+    // let apiResponse: ApiResponse = { success: false, message: '' };
     const url = this.userUrlPrefix.concat(this.registerSuffix);
     // let response = this.httpClient.get<any>(url);
     console.log(url);
@@ -46,10 +46,11 @@ export class LoginService {
     //     Authorization: 'my-auth-token',
     //   }),
     // };
-    this.httpClient.post<ApiResponse>(url, user).subscribe((response) => {
-      apiResponse = response;
-    });
-    return apiResponse.success;
+    // this.httpClient.post<ApiResponse>(url, user).subscribe((response) => {
+    //   apiResponse = response;
+    // });
+    return this.httpClient.post<ApiResponse>(url, user);
+    // return apiResponse.success;
   }
 
   login(user: User): Observable<any> {
