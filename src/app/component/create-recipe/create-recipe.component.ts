@@ -1,5 +1,6 @@
 import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Ingredient } from 'src/app/model/Ingredient';
 import { Recipe } from 'src/app/model/Recipe';
 import { CreateRecipeService } from 'src/app/service/create-recipe.service';
@@ -14,7 +15,10 @@ export class CreateRecipeComponent implements OnInit {
   recipeImage: string = '';
   ingredients: Ingredient[] = [{ name: '' }];
   instructions: string[] = [''];
-  constructor(private createRecipeService: CreateRecipeService) {}
+  constructor(
+    private createRecipeService: CreateRecipeService,
+    private toastr: ToastrService
+  ) {}
   ngOnInit(): void {}
   addIngredient(): void {
     this.ingredients = [...this.ingredients, { name: '' }];
@@ -50,13 +54,28 @@ export class CreateRecipeComponent implements OnInit {
       this.recipeImage,
       this.instructions
     );
-    this.createRecipeService.createRecipe(this.ingredients, recipe);
+    this.createRecipeService.createRecipe(this.ingredients, recipe).subscribe(
+      (response) => {
+        this.toastr.success(
+          `Successfully created ${recipe.name} recipe`,
+          'SUCCESS'
+        );
+        this.resetParameters();
+      },
+      (error) => this.toastr.error(error.message, 'ERROR')
+    );
     // let result: boolean = this.createRecipeService.createRecipe(
     //   this.ingredients.slice(),
     //   this.instructions.slice()
     // );
   }
 
+  resetParameters() {
+    this.recipeName = '';
+    this.recipeImage = '';
+    this.ingredients = [{ name: '' }];
+    this.instructions = [''];
+  }
   trackByIndex(index: number, obj: any): any {
     return index;
   }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { Ingredient } from '../model/Ingredient';
 import { Recipe } from '../model/Recipe';
@@ -18,20 +19,19 @@ export class CreateRecipeService {
       (ingredient) => ingredient.name.trim().length > 0
     );
   }
-  createRecipe(ingredients: Ingredient[], recipe: Recipe) {
+  createRecipe(ingredients: Ingredient[], recipe: Recipe): Observable<RecipeResponse> {
     ingredients = this.trimIngredients(ingredients);
-    this.postRecipe(recipe)
+    return this.postRecipe(recipe)
       .pipe(
-        tap((response) => console.log(`Reponse from postRecipe(): ${response}`))
-      )
-      .subscribe((recipeResponse) => {
-        this.putRecipeToUser(recipeResponse.id)
-          .pipe(tap((response) => console.log(response)))
-          .subscribe((reponse) => {
-            if (ingredients.length > 0)
-              this.putIngredientsToRecipe(ingredients, recipeResponse.id);
-          });
-      });
+        tap((response) => console.log(`Reponse from postRecipe(): ${response}`)));
+
+      //   this.putRecipeToUser(recipeResponse.id)
+      //     .pipe(tap((response) => console.log(response)))
+      //     .subscribe((reponse) => {
+      //       if (ingredients.length > 0)
+      //         this.putIngredientsToRecipe(ingredients, recipeResponse.id);
+      //     });
+      // });
   }
 
   postRecipe(recipe: Recipe) {
