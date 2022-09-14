@@ -30,6 +30,7 @@
   height: 100%;
   background-color: var(--appLightGrey);
   border-radius: 10px;
+  padding: 5px;
 }
 #my-recipes-header {
   display: flex;
