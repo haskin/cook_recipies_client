@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Ingredient } from 'src/app/model/Ingredient';
 import { Recipe } from 'src/app/model/Recipe';
 import { CreateRecipeService } from 'src/app/service/create-recipe.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-create-recipe',
@@ -17,6 +18,7 @@ export class CreateRecipeComponent implements OnInit {
   instructions: string[] = [''];
   constructor(
     private createRecipeService: CreateRecipeService,
+    private userService: UserService,
     private toastr: ToastrService
   ) {}
   ngOnInit(): void {}
@@ -55,12 +57,18 @@ export class CreateRecipeComponent implements OnInit {
       this.instructions
     );
     this.createRecipeService.createRecipe(this.ingredients, recipe).subscribe(
-      (response) => {
-        this.toastr.success(
-          `Successfully created ${recipe.name} recipe`,
-          'SUCCESS'
+      (recipe) => {
+        this.userService.addRecipeToUser(recipe.id).subscribe(
+          () => {
+            this.toastr.success(
+              `Successfully created ${recipe.name} recipe`,
+              'SUCCESS'
+            );
+            this.resetParameters();
+          },
+          (error: any) => this.toastr.error(error.message, 'ERROR')
         );
-        this.resetParameters();
+        // this.userService.getUserRecipes();
       },
       (error) => this.toastr.error(error.message, 'ERROR')
     );

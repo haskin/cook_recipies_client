@@ -46,6 +46,10 @@ export class UserService implements OnInit {
     // return this.httpClient.get<Recipe[]>(`${this.USER_URL}/recipes`);
   }
 
+  addRecipeToUser(recipeId: number): any {
+    return this.httpClient.put(`${this.USER_URL}/recipe/${recipeId}`, {});
+  }
+
   deleteUserRecipe(recipeId: number) {
     let url = `${this.USER_URL}/recipe/${recipeId}`;
     console.log(url);

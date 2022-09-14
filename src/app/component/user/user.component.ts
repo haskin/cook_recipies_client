@@ -45,7 +45,10 @@ export class UserComponent implements OnInit, OnDestroy {
       (error) => console.log(error)
     );
     this.recipesSubscription = this.userService.recipesSubject.subscribe(
-      (recipes) => (this.recipes = recipes)
+      (recipes) => {
+        console.log('got recipes');
+        this.recipes = recipes;
+      }
     );
     this.userService.getUserRecipes();
     // this.recipesSubscription = this.userService
