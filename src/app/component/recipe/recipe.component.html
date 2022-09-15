@@ -5,21 +5,22 @@
     <div id="image-container">
       <img src="{{recipe.image}}" alt="" />
     </div>
-    <h2>Ingredients</h2>
-    <ul>
-      <li class="list-item" *ngFor="let ingredient of recipe.ingredients">
-        {{ingredient.name}}
-      </li>
-    </ul>
-    <h2>Instruction</h2>
-    <ul>
-      <li
-        class="list-item"
-        *ngFor="let instruction of getInstructions(); let index = index"
-      >
-        {{index+1}}. {{instruction.description}}
-      </li>
-    </ul>
-    <div></div>
+    <div id="information-container">
+      <h2>Ingredients</h2>
+      <ul>
+        <li class="list-item" *ngFor="let ingredient of recipe.ingredients">
+          {{ingredient.name}}
+        </li>
+      </ul>
+      <h2>Instruction</h2>
+      <ul>
+        <li
+          class="list-item"
+          *ngFor="let instruction of getInstructions(); let index = index"
+        >
+          {{index+1}}. {{instruction.description}}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
