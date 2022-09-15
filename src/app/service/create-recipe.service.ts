@@ -19,19 +19,22 @@ export class CreateRecipeService {
       (ingredient) => ingredient.name.trim().length > 0
     );
   }
-  createRecipe(ingredients: Ingredient[], recipe: Recipe): Observable<RecipeResponse> {
+  createRecipe(
+    ingredients: Ingredient[],
+    recipe: Recipe
+  ): Observable<RecipeResponse> {
     ingredients = this.trimIngredients(ingredients);
-    return this.postRecipe(recipe)
-      .pipe(
-        tap((response) => console.log(`Reponse from postRecipe(): ${response}`)));
+    return this.postRecipe(recipe).pipe(
+      tap((response) => console.log(`Reponse from postRecipe(): ${response}`))
+    );
 
-      //   this.putRecipeToUser(recipeResponse.id)
-      //     .pipe(tap((response) => console.log(response)))
-      //     .subscribe((reponse) => {
-      //       if (ingredients.length > 0)
-      //         this.putIngredientsToRecipe(ingredients, recipeResponse.id);
-      //     });
-      // });
+    //   this.putRecipeToUser(recipeResponse.id)
+    //     .pipe(tap((response) => console.log(response)))
+    //     .subscribe((reponse) => {
+    //       if (ingredients.length > 0)
+    //         this.putIngredientsToRecipe(ingredients, recipeResponse.id);
+    //     });
+    // });
   }
 
   postRecipe(recipe: Recipe) {
@@ -62,7 +65,7 @@ export class CreateRecipeService {
     recipeName: string,
     recipeImage: string,
     instructions: string[]
-  ): Recipe {
+  ): any {
     let delimeter = '|';
     let instructionString: string = instructions
       .map((instruction) => instruction.trim())

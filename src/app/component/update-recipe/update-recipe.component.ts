@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Ingredient } from 'src/app/model/Ingredient';
+import { Instruction } from 'src/app/model/Instruction';
 import { Recipe } from 'src/app/model/Recipe';
 import { CreateRecipeService } from 'src/app/service/create-recipe.service';
 import { RecipeService } from 'src/app/service/recipe.service';
@@ -20,7 +21,7 @@ export class UpdateRecipeComponent implements OnInit {
   recipeName: string = '';
   recipeImage: string = '';
   ingredients: Ingredient[] = [{ name: '' }];
-  instructions: string[] = [''];
+  instructions: Instruction[] = [{ step: 0, description: '' }];
 
   constructor(
     private updateRecipeService: UpdateRecipeService,
@@ -38,10 +39,11 @@ export class UpdateRecipeComponent implements OnInit {
         // this.recipe = recipeResponse
         this.recipeName = recipeResponse.name;
         this.recipeImage = recipeResponse.image;
-        this.instructions =
-          this.updateRecipeService.convertInstructionStringToArray(
-            recipeResponse.instructions
-          );
+        this.instructions = recipeResponse.instructions;
+        // this.instructions =
+        //   this.updateRecipeService.convertInstructionStringToArray(
+        //     recipeResponse.instructions
+        //   );
         this.ingredients = recipeResponse.ingredients;
       });
   }
@@ -60,7 +62,10 @@ export class UpdateRecipeComponent implements OnInit {
   }
 
   addInstruction(): void {
-    this.instructions = [...this.instructions, ''];
+    this.instructions = [
+      ...this.instructions,
+      { step: this.instructions.length, description: '' },
+    ];
   }
 
   deleteInstruction(instructionIndex: number): void {
@@ -80,20 +85,16 @@ export class UpdateRecipeComponent implements OnInit {
 
     let recipe: Recipe = {
       id: this.recipeId,
-      ...this.createRecipeService.dataToRecipe(
-        this.recipeName,
-        this.recipeImage,
-        this.instructions
-      ),
+      name: this.recipeName,
+      image: this.recipeImage,
+      instructions: this.instructions,
       ingredients: ingredients,
     };
 
-    this.updateRecipeService
-      .updateRecipe(recipe)
-      .subscribe((response) => {
-        console.log(response);
-        this.toastr.success("Recipe has been updated successfuly", "SUCCESS");
-      });
+    this.updateRecipeService.updateRecipe(recipe).subscribe((response) => {
+      console.log(response);
+      this.toastr.success('Recipe has been updated successfuly', 'SUCCESS');
+    });
   }
 
   trackByIndex(index: number, obj: any): any {

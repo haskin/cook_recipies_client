@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Instruction } from 'src/app/model/Instruction';
 import { Recipe } from 'src/app/model/Recipe';
 import { RecipeService } from 'src/app/service/recipe.service';
 
@@ -23,8 +24,10 @@ export class RecipeComponent implements OnInit {
       .subscribe((recipeResponse) => (this.recipe = recipeResponse));
   }
 
-  getInstructions(): string[] {
-    if (this.recipe) return this.recipe.instructions.split('|');
+  getInstructions(): Instruction[] {
+    if (this.recipe)
+      return [...this.recipe.instructions].sort((a, b) => a.step - b.step);
+    // if (this.recipe) return this.recipe.instructions.split('|');
     return [];
   }
 }
