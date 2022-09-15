@@ -83,13 +83,23 @@ export class UpdateRecipeComponent implements OnInit {
       this.ingredients
     );
 
+    let instructions = this.createRecipeService.trimInstructions(
+      this.instructions
+    );
+
     let recipe: Recipe = {
       id: this.recipeId,
       name: this.recipeName,
       image: this.recipeImage,
-      instructions: this.instructions,
+      instructions: instructions,
       ingredients: ingredients,
     };
+
+    recipe.instructions.forEach((instruction) =>
+      console.log(
+        `step:${instruction.step}, description:${instruction.description}`
+      )
+    );
 
     this.updateRecipeService.updateRecipe(recipe).subscribe((response) => {
       console.log(response);

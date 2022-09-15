@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { Ingredient } from '../model/Ingredient';
+import { Instruction } from '../model/Instruction';
 import { Recipe } from '../model/Recipe';
 import { RecipeResponse } from '../model/RecipeReponse';
 
@@ -19,6 +20,17 @@ export class CreateRecipeService {
       (ingredient) => ingredient.name.trim().length > 0
     );
   }
+
+  trimInstructions(instructions: Instruction[]): Instruction[] {
+    let trimmedInstruction = instructions.filter(
+      (ingredient) => ingredient.description.trim().length > 0
+    );
+    trimmedInstruction.forEach(
+      (instruction, index) => (instruction.step = index)
+    );
+    return trimmedInstruction;
+  }
+
   createRecipe(
     ingredients: Ingredient[],
     recipe: Recipe

@@ -2,6 +2,7 @@ import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Ingredient } from 'src/app/model/Ingredient';
+import { Instruction } from 'src/app/model/Instruction';
 import { Recipe } from 'src/app/model/Recipe';
 import { CreateRecipeService } from 'src/app/service/create-recipe.service';
 import { UserService } from 'src/app/service/user.service';
@@ -15,7 +16,7 @@ export class CreateRecipeComponent implements OnInit {
   recipeName: string = '';
   recipeImage: string = '';
   ingredients: Ingredient[] = [{ name: '' }];
-  instructions: string[] = [''];
+  instructions: Instruction[] = [{ step: 0, description: '' }];
   constructor(
     private createRecipeService: CreateRecipeService,
     private userService: UserService,
@@ -36,7 +37,10 @@ export class CreateRecipeComponent implements OnInit {
   }
 
   addInstruction(): void {
-    this.instructions = [...this.instructions, ''];
+    this.instructions = [
+      ...this.instructions,
+      { step: this.instructions.length, description: '' },
+    ];
   }
 
   deleteInstruction(instructionIndex: number): void {
@@ -51,11 +55,20 @@ export class CreateRecipeComponent implements OnInit {
 
   submitNewRecipe(): void {
     console.log('creating a new recipe');
-    let recipe: Recipe = this.createRecipeService.dataToRecipe(
-      this.recipeName,
-      this.recipeImage,
+    let ingredients = this.createRecipeService.trimIngredients(
+      this.ingredients
+    );
+
+    let instructions = this.createRecipeService.trimInstructions(
       this.instructions
     );
+
+    let recipe: Recipe = {
+      name: this.recipeName,
+      image: this.recipeImage,
+      instructions: instructions,
+      ingredients: ingredients,
+    };
     this.createRecipeService.createRecipe(this.ingredients, recipe).subscribe(
       (recipe) => {
         this.userService.addRecipeToUser(recipe.id).subscribe(
@@ -82,7 +95,7 @@ export class CreateRecipeComponent implements OnInit {
     this.recipeName = '';
     this.recipeImage = '';
     this.ingredients = [{ name: '' }];
-    this.instructions = [''];
+    this.instructions = [{ step: 0, description: '' }];
   }
   trackByIndex(index: number, obj: any): any {
     return index;

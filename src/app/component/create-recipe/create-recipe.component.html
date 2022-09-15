@@ -68,7 +68,7 @@
           <input
             class="instruction-input"
             name="instruction + {{index}}"
-            [(ngModel)]="instructions[index]"
+            [(ngModel)]="instructions[index].description"
             contenteditable="true"
           />
           <button class="delete-button" (click)="deleteInstruction(index)">
