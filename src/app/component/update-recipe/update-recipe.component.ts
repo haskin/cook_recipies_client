@@ -2,6 +2,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs';
 import { Ingredient } from 'src/app/model/Ingredient';
 import { Instruction } from 'src/app/model/Instruction';
 import { Recipe } from 'src/app/model/Recipe';
@@ -101,10 +102,16 @@ export class UpdateRecipeComponent implements OnInit {
       )
     );
 
-    this.updateRecipeService.updateRecipe(recipe).subscribe((response) => {
-      console.log(response);
-      this.toastr.success('Recipe has been updated successfuly', 'SUCCESS');
-    });
+    this.updateRecipeService.updateRecipe(recipe).subscribe(
+      (response) => {
+        console.log(response);
+        this.toastr.success('Recipe has been updated successfuly', 'SUCCESS');
+      },
+      (error) => {
+        // console.log(error);
+        this.toastr.error(error.error.message);
+      }
+    );
   }
 
   trackByIndex(index: number, obj: any): any {
