@@ -2,7 +2,9 @@
 <div id="recipe-component-container">
   <div *ngIf="recipe">
     <h1>{{recipe.name}}</h1>
-    <img src="{{recipe.image}}" alt="" />
+    <div id="image-container">
+      <img src="{{recipe.image}}" alt="" />
+    </div>
     <h2>Ingredients</h2>
     <ul>
       <li class="list-item" *ngFor="let ingredient of recipe.ingredients">
