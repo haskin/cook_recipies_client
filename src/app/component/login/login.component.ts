@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           this.toastr.success(response.message, 'SUCCESS');
           apiResponse = response;
         },
-        (error) => this.toastr.error(error.message, 'ERROR MESSAGE')
+        (error) => this.toastr.error(error.error.message, 'ERROR MESSAGE')
       );
   }
 
@@ -52,6 +52,6 @@ export class LoginComponent implements OnInit {
       console.log(response);
       this.router.navigate(['/user']);
       },
-    (error)=> this.toastr.error(error.message, "ERROR MESSAGE"));
+    (error)=> this.toastr.error(error.error.message, "ERROR MESSAGE"));
   }
 }
