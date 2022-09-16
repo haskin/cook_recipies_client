@@ -1,7 +1,7 @@
 <app-navigation></app-navigation>
 <div id="create-recipe-container">
   <h1 class="recipe-name-title">Create a New Recipe</h1>
-  <form id="create-recipe-form">
+  <form id="create-recipe-form" ngNativeValidate>
     <div class="form-row">
       <h2 class="recipe-name-title" *ngIf="!recipeName">Recipe Name</h2>
       <h2 class="recipe-name-title">{{recipeName}}</h2>
@@ -9,7 +9,6 @@
         name="recipe-name"
         [(ngModel)]="recipeName"
         placeholder="please enter a recipe name"
-        ngModel
         required
       />
     </div>
@@ -21,7 +20,7 @@
         [src]="recipeImage"
         alt="recipe-image"
       />
-      <input [(ngModel)]="recipeImage" name="recipe-image"  />
+      <input [(ngModel)]="recipeImage" name="recipe-image"  required/>
     </div>
     <div class="form-row">
       <div style="display: flex; align-items: center; margin-bottom: 10px">

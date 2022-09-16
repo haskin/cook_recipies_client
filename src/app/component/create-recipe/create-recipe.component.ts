@@ -83,7 +83,7 @@ export class CreateRecipeComponent implements OnInit {
         );
         // this.userService.getUserRecipes();
       },
-      (error) => this.toastr.error(error.message, 'ERROR')
+      (error) => this.toastr.error(error.error.message, 'ERROR')
     );
     // let result: boolean = this.createRecipeService.createRecipe(
     //   this.ingredients.slice(),
